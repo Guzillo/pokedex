@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@types/node": "^24.8.1",
+    "typescript": "^5.9.3"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/main.js",
+    "dev": "npx tsc && node dist/main.js"
+  }
+}
