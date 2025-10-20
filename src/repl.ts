@@ -14,7 +14,7 @@ export function startREPL(): void {
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "Pokedex >",
+    prompt: "Pokedex > ",
   });
   // display the prompt 
   rl.prompt();
