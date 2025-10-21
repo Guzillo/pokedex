@@ -8,12 +8,12 @@ export function cleanInput(input: string): string[] {
     .filter(word => word !== "");
 }
 
-export function startREPL(state: State): void {
+export async function startREPL(state: State) {
   const { rlInterface, commandsRegistery } = state;
   // display the prompt 
   rlInterface.prompt();
   // listen to the input
-  rlInterface.on('line', (line) => {
+  rlInterface.on('line', async (line) => {
     if (line === "") {
       rlInterface.prompt();
       return;
@@ -23,7 +23,7 @@ export function startREPL(state: State): void {
     // if command is found -> call it, if not -> print the information
     if (command) {
       try {
-        command.callback(state);
+        await command.callback(state);
       }
       catch (err) {
         console.log(err);
@@ -31,7 +31,6 @@ export function startREPL(state: State): void {
     } else {
       console.log("Unknown command");
     }
-
-    rlInterface.prompt();
   });
+  rlInterface.prompt();
 }

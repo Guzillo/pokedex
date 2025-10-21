@@ -1,7 +1,6 @@
 import { type State } from "./state.js";
 
-export function commandExit(state: State): void {
-
+export async function commandExit(state: State): Promise<void> {
   console.log("Closing the Pokedex... Goodbye!");
   state.rlInterface.close();
   process.exit(0);

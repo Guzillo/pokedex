@@ -1,9 +1,11 @@
+import { commandMap } from "./command_map.js";
 import { startREPL } from "./repl.js";
 import { initState } from "./state.js";
 import { type State } from "./state.js";
-function main() {
+
+async function main() {
   const state: State = initState();
-  startREPL(state);
+  await startREPL(state);
 }
 
 main();
