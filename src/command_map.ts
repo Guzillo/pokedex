@@ -24,7 +24,8 @@ export async function commandMap(state: State): Promise<void> {
     displayLocations(locations);
     return;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error)
+      console.log(error.message);
   }
 }
 
@@ -45,6 +46,7 @@ export async function commandMapb(state: State): Promise<void> {
     displayLocations(locations);
     return;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error)
+      console.log(error.message);
   }
 }
