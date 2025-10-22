@@ -23,7 +23,7 @@ export async function startREPL(state: State) {
     // if command is found -> call it, if not -> print the information
     if (command) {
       try {
-        await command.callback(state);
+        await command.callback(state, ...args.slice(1));
       }
       catch (err) {
         console.log(err);

@@ -12,7 +12,7 @@ export async function commandMap(state: State): Promise<void> {
   let locations: ShallowLocations;
   try {
     const {
-      pokeAPI, nextLocationURL, prevLocationURL } = state
+      pokeAPI, nextLocationURL } = state
     if (!nextLocationURL) {
       locations = await pokeAPI.fetchLocations();
     }
@@ -32,7 +32,7 @@ export async function commandMapb(state: State): Promise<void> {
   let locations: ShallowLocations;
   try {
     const {
-      pokeAPI, prevLocationURL, nextLocationURL } = state
+      pokeAPI, prevLocationURL } = state
     if (!prevLocationURL) {
       console.log("you're on the first page");
       return

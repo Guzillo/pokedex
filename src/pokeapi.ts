@@ -22,9 +22,9 @@ export class PokeAPI {
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     this.pokeCache.displayCache();
     const locationsURL = `${PokeAPI.baseURL}/location-area/?offset=0&limit=20`;
-    const cacheRecord = this.pokeCache.get(pageURL ?? locationsURL);
+    const cacheRecord = this.pokeCache.get<ShallowLocations>(pageURL ?? locationsURL);
     if (cacheRecord) {
-      return cacheRecord as ShallowLocations;
+      return cacheRecord;
     }
     try {
       const response = await this.fetchURL(pageURL ?? locationsURL);
@@ -37,9 +37,9 @@ export class PokeAPI {
 
   async fetchLocation(locationName: string): Promise<Location> {
     const locationURL = `${PokeAPI.baseURL}/location-area/${locationName}/`;
-    const cacheValue = this.pokeCache.get(locationURL);
+    const cacheValue = this.pokeCache.get<Location>(locationURL);
     if (cacheValue) {
-      return cacheValue as Location;
+      return cacheValue;
     }
     try {
       const response = await this.fetchURL(locationURL);
@@ -51,15 +51,65 @@ export class PokeAPI {
   }
 
 }
-
 export type ShallowLocations = {
-  count: number,
-  next?: string,
-  previous?: string,
-  results: Location[]
+  count: number;
+  next: string;
+  previous: string;
+  results: {
+    name: string;
+    url: string;
+  }[];
 };
 
 export type Location = {
-  name: "string",
-  url: "string"
+  encounter_method_rates: {
+    encounter_method: {
+      name: string;
+      url: string;
+    };
+    version_details: {
+      rate: number;
+      version: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }[];
+  game_index: number;
+  id: number;
+  location: {
+    name: string;
+    url: string;
+  };
+  name: string;
+  names: {
+    language: {
+      name: string;
+      url: string;
+    };
+    name: string;
+  }[];
+  pokemon_encounters: {
+    pokemon: {
+      name: string;
+      url: string;
+    };
+    version_details: {
+      encounter_details: {
+        chance: number;
+        condition_values: any[];
+        max_level: number;
+        method: {
+          name: string;
+          url: string;
+        };
+        min_level: number;
+      }[];
+      max_chance: number;
+      version: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }[];
 };
